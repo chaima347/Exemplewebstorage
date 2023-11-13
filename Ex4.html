@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="compter()">
+    
+    <p>welcome to the website</p>
+    <p  id="output"></p>
+    <script>
+        function compter(){
+            if(localStorage.visits){
+                localStorage.visits=Number(localStorage.visits)+1; 
+            } else {
+                localStorage.visits=1 ; 
+            }
+            document.getElementById('output').innerHTML="le nombre de vistes: "+ " "+ localStorage.visits +" "+"visiteurs";
+        }
+    </script>
+</body>
+</html>

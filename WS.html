@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Storage API</title>
+  <style>
+    body{
+      color: green;
+      text-align: center;
+      font-size: 30px;
+      margin-top: 30px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+<script>
+ if(typeof(Storage)!=="undefined") {
+	 //effacer ancien local storage
+	 localStorage.clear();
+  localStorage.setItem("Nom","DSI");
+  localStorage.setItem("Institut", "Iset Charguia");
+   document.write("Bonjour"+" "+localStorage.Nom+" "+"d'" +" "+ localStorage.Institut);
+}
+ else{
+  alert("désolé ! votre navigateur ne supporte pas les webstorages")
+ }
+</script>
+</body>
+</html>

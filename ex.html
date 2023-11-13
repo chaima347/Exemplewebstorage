@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .geoColor {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="langSelect">Langue</label>
+    <select name="langSelect" id="lang">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+    </select>
+
+    <label for="colorSelect">Couleur</label>
+    <select name="colorSelect" id="color">
+        <option value="red">Rouge</option>
+        <option value="black">Noir</option>
+        <option value="green">Vert</option>
+        <option value="yellow">Jaune</option>
+        <option value="pink">Rouge</option>
+        <option value="brown">Marron</option>
+    </select>
+
+    <label for="policeSelect">Police</label>
+    <select name="policeSelect" id="police">
+        <option value="arial">Arial</option>
+        <option value="times">Times</option>
+        <option value="verdana">Verdana</option>
+    </select>
+
+    <label for="fond">Fond : </label>
+    <select name="fond" id="fond">
+        <option value="red">Rouge</option>
+        <option value="black">Noir</option>
+        <option value="green">Vert</option>
+        <option value="yellow">Jaune</option>
+        <option value="pink">Rouge</option>
+        <option value="brown">Marron</option>
+    </select>
+
+    <input type="submit" id="btn">
+
+    <div id="geo" class="geoColor"></div>
+    <div id="new"></div>
+
+    <script>
+        window.addEventListener('load', loadStyles)
+        function updateGeolocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                document.getElementById("output").innerHTML = "Geolocation n’est pas supporté par votre navigateur";
+            }
+        }
+
+        function showPosition(position) {
+            var storedLatitude = localStorage.getItem('latitude');
+            var storedLongitude = localStorage.getItem('longitude');
+
+            if (storedLatitude !== position.coords.latitude.toString() || storedLongitude !== position.coords.longitude.toString()) {
+                document.getElementById("geo").classList.add('geoColor');
+                document.getElementById("new").innerHTML = "Vous avez changé de lieu:  Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+
+                localStorage.setItem('latitude', position.coords.latitude);
+                localStorage.setItem('longitude', position.coords.longitude);
+            }
+        }
+
+        updateGeolocation();
+        function loadStyles(){
+            var storedColor = localStorage.getItem('selectedColor');
+        var storedFont = localStorage.getItem('selectedFont');
+        var storedBackground = localStorage.getItem('selectedBackground');
+
+        if (storedColor && storedFont && storedBackground) {
+            document.getElementById('geo').style.color = localStorage.getItem('selectedColor');
+            document.getElementById('geo').style.fontFamily = localStorage.getItem('selectedfont');
+            document.getElementById('geo').style.backgroundColor =  localStorage.getItem('selectedpolice');
+
+        }
+        }
+
+        function changerStyles() {
+            var Color = document.getElementById("color").value;
+            var Font = document.getElementById("police").value;
+            var Background = document.getElementById("fond").value;
+       
+            localStorage.setItem('selectedColor', Color);
+            localStorage.setItem('selectedFont', Font);
+            localStorage.setItem('selectedBackground', Background);
+
+            document.getElementById("new").innerText = "vous avez changer le couleur vers   " + Color;
+        }
+
+        document.getElementById("btn").addEventListener("click", changerStyles);
+
+      
+    </script>
+</body>
+
+</html>

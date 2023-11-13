@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="compter()">
+    
+    <p>Welcome to the website</p>
+
+    <form id="userInfoForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
+
+        <button type="button" onclick="saveUserInfo()">Submit</button>
+    </form>
+
+    <p id="output"></p>
+
+    <script>
+        function compter() {
+            if (localStorage.visits) {
+              
+                localStorage.visits = Number(localStorage.visits) + 1; 
+            } else {
+                localStorage.visits = 1; 
+            }
+        }
+        function saveUserInfo() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            localStorage.setItem('firstname', firstName);
+            localStorage.setItem('lastname', lastName); 
+            document.getElementById('output').innerHTML = "Bonjour "  + lastName + " " + firstName + ", vous avez visité cette page " + parseInt(localStorage.visits )+ " fois.";
+        }
+    </script>
+</body>
+</html>
